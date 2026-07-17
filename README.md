@@ -1,0 +1,1 @@
+# 16-16-Weight-Stationary-Systolic-Array-AI-Accelerator-for-Edge-INT8-Quantized-Inference
