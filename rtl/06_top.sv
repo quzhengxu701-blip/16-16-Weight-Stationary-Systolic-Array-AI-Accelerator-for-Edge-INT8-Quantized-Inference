@@ -1,28 +1,28 @@
 // =============================================================================
-// File: 06_top.sv
-// Description: QZX Neural Core Top-Level Integration (128-bit AXI)
-//              - AXI4-Lite CSR interface (for RISC-V integration)
-//              - AXI4-Stream data interfaces (128-bit)
-//              - Integrated post-processing unit
-// Version: 18.4 - Widened to 128-bit AXI-Stream for 2x throughput
+// 文件：06_top.sv
+// 描述：QZX 神经核心顶层集成（128位AXI）
+//              - AXI4-Lite CSR接口（用于RISC-V集成）
+//              - 128位AXI4-Stream数据接口
+//              - 集成后处理单元
+// 版本：18.4 - 扩展为128位AXI-Stream，以实现2倍吞吐量
 // =============================================================================
 
 `timescale 1ns/1ps
 
-module qzx_top
-    import qzx_pkg::*;
+模块 qzx_top
+    导入 qzx_pkg::*;
 #(
-    parameter int ROWS_P          = ROWS,
-    parameter int COLS_P          = COLS,
-    parameter int WEIGHT_FIFO_DEP = WEIGHT_FIFO_DEPTH,
-    parameter int OUTPUT_FIFO_DEP = OUTPUT_FIFO_DEPTH,
-    parameter bit ENABLE_ICG      = 1,
-    parameter bit ENABLE_PARITY   = 1,
-    parameter bit ENABLE_POSTPROC = 1  // Enable post-processing unit
+    参数  ROWS_P          = ROWS,
+    参数 int COLS_P          = COLS,
+    参数 int WEIGHT_FIFO_DEP = WEIGHT_FIFO_DEPTH,
+    参数 整型 OUTPUT_FIFO_DEP = OUTPUT_FIFO_DEPTH,
+    参数 位 ENABLE_ICG      = 1,
+    参数 位 ENABLE_PARITY   = 1,
+    参数 位 ENABLE_POSTPROC = 1  // 启用后处理单元
 )(
-    input  logic                          clk,
-    input  logic                          rst_n,
-    input  logic                          scan_enable,
+    输入  逻辑                          clk,
+    输入  逻辑                          rst_n,
+    输入  逻辑                          scan_enable,
     
     // =========================================================================
     // AXI4-Lite Configuration Interface (replaces APB)
