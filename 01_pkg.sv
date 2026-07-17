@@ -1,37 +1,29 @@
 `timescale 1ns/1ps
 
 // =============================================================================
-// PACKAGE: qzx_pkg
+// 包：qzx_pkg
 // =============================================================================
 package qzx_pkg;
 
     // =========================================================================
-    // Version Information
+    // 数组配置
     // =========================================================================
-    localparam logic [7:0]  IP_VERSION_MAJOR = 8'd18;
-    localparam logic [7:0]  IP_VERSION_MINOR = 8'd1;  // Minor version
-    localparam logic [15:0] IP_VERSION_PATCH = 16'h0000;
-    localparam logic [31:0] IP_VERSION = {IP_VERSION_MAJOR, IP_VERSION_MINOR, IP_VERSION_PATCH};
-
-    // =========================================================================
-    // Array Configuration
-    // =========================================================================
-    localparam int ROWS       = 8;
-    localparam int COLS       = 8;
-    localparam int ARRAY_SIZE = 8;   // Alias for compatibility
-    localparam int PE_STAGES  = 2;   // Pipeline stages in PE MAC
+    局部参数 整型 ROWS       = 8;
+    局部参数 整型 COLS       = 8;
+    局部参数 整型 ARRAY_SIZE = 8;   // 用于兼容性的别名
+    局部参数 整型 PE_STAGES  = 2;   // PE MAC 中的流水线级数
     
     // =========================================================================
-    // Data Widths
+    // 数据宽度
     // =========================================================================
-    localparam int W_WIDTH    = 8;   // Weight width
-    localparam int A_WIDTH    = 8;   // Activation width
-    localparam int ACC_WIDTH  = 32;  // Accumulator width (expanded from 24)
-    localparam int IDX_WIDTH  = 2;   // Sparse index width for 2:4
+    局部参数 整数 W_WIDTH    = 8;   // 权重量化宽度
+    局部参数 整数 A_WIDTH    = 8;   // 激活宽度
+    局部参数 整数 ACC_WIDTH  = 32;  // 累加器宽度（由24扩展而来）
+    局部参数 整数 IDX_WIDTH  = 2;   // 2:4 稀疏索引宽度
     
     // Derived packet widths
     localparam int WGT_PKT_WIDTH = (2*W_WIDTH) + (2*IDX_WIDTH);  // 20 bits: 2 weights + 2 indices
-    localparam int ACT_PKT_WIDTH = 4*A_WIDTH;                     // 32 bits: 4 activations
+    局部参数 整数 ACT_PKT_WIDTH = 4*A_WIDTH;                     // 32位：4个激活值
 
     // =========================================================================
     // AXI4-Stream Configuration (Widened to 128-bit)
