@@ -1,30 +1,30 @@
 // =============================================================================
-// File: 07_postproc.sv
-// Description: Vector Post-Processing Unit with Scalable Bias Memory
-//              Supports: Bias addition, Scale+Shift, Full Requantization
-//              3-stage pipeline: Bias -> Scale -> Shift+Round+Saturate
-//              Scalable bias memory supports any array size (up to 256 cols)
+// 文件：07_postproc.sv
+// 描述：具有可扩展偏置存储器的向量后处理单元
+// 支持：偏置加法、缩放+移位、全重新量化
+// 三阶段流水线：偏置 -> 缩放 -> 移位+四舍五入+饱和
+// 可扩展的偏置存储器支持任意数组大小（最多256列）
 // =============================================================================
 
 `timescale 1ns/1ps
 
 // =============================================================================
-// MODULE: qzx_postproc_bias_mem
-// Description: Scalable bias memory for post-processing unit
-//              Supports any array size up to 256 columns
-//              Loaded via AXI-Lite writes to CSR_PP_BIAS_MEM
+// 模块：qzx_postproc_bias_mem
+// 描述：用于后处理单元的可扩展偏置存储器
+// 支持最多256列的任意数组大小
+//              通过AXI-Lite写入CSR_PP_BIAS_MEM加载
 // =============================================================================
-module qzx_postproc_bias_mem
-    import qzx_pkg::*;
+模块 qzx_postproc_bias_mem
+    导入 qzx_pkg::*;
 #(
-    parameter int COLS_P = 32,
-    parameter int BIAS_WIDTH = PP_BIAS_WIDTH
+    参数  COLS_P = 32,
+    参数 整数 BIAS_WIDTH = PP_BIAS_WIDTH
 )(
-    input  logic                          clk,
-    input  logic                          rst_n,
-    input  logic                          clear,
+    输入  逻辑                          clk,
+    输入  逻辑                          rst_n,
+    输入  逻辑                          清除，
     
-    // Single write interface (from CSR - for backwards compatibility)
+    // 单写接口（源自CSR——为向后兼容而保留）
     input  logic                          wr_en,
     input  logic [$clog2(COLS_P)-1:0]     wr_addr,
     input  logic signed [BIAS_WIDTH-1:0]  wr_data,
